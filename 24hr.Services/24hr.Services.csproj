@@ -85,10 +85,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReplyService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\24hr.Data\24hr.Data.csproj">
+      <Project>{9AD7E2DB-23D7-43F5-A260-D418408ECB45}</Project>
+      <Name>24hr.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\24hr.Models\24hr.Models.csproj">
+      <Project>{2808710D-B0A0-4669-B120-DF59FE3B900E}</Project>
+      <Name>24hr.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
