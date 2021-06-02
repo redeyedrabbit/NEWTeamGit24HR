@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using _24hr.Data;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
