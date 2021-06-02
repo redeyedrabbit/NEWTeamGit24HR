@@ -19,9 +19,9 @@ namespace _24hr.Data
         [Required]
         public Guid AuthorId { get; set; } // Basic comment set up.
                
-        [ForeignKey(nameof(Reply))]
-        public int ReplyId { get; set; }
-        public virtual Reply Reply { get; set; }
+        [ForeignKey(nameof(Post))]
+        public int PostId { get; set; }
+        public virtual Post Post { get; set; } 
 
         
 

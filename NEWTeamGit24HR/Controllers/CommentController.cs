@@ -22,7 +22,7 @@ namespace NEWTeamGit24HR.Controllers
         }
 
         // Create Comment
-        public IHttpActionResult Post(CreateComment comment)
+        public IHttpActionResult Post(CommentCreate comment)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

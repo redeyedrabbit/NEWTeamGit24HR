@@ -39,11 +39,9 @@ namespace _24hr.Services
             using (var ctx = new ApplicationDbContext())
             {
                 var query = ctx
-                    .Posts
+                    .Comments
                     .Where(e => e.AuthorId == _userId)
-                    .Select(
-                        e =>
-                        new CommentListItem
+                    .Select( e => new CommentListItem
                         {
                             Id = e.Id,
                             Text = e.Text
