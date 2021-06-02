@@ -10,7 +10,6 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using NEWTeamGit24HR.Providers;
 using NEWTeamGit24HR.Models;
-using _24hr.Data;
 
 namespace NEWTeamGit24HR
 {
