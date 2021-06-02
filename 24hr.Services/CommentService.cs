@@ -25,11 +25,12 @@ namespace _24hr.Services
                 {
                     Text = model.Text,
                     Id = model.Id,
+                    AuthorId = model.AuthorId
                 };
 
             using (var ctx = new ApplicationDbContext())
             {
-                ctx.Posts.Add(entity);
+                ctx.Comments.Add(entity); 
                 return ctx.SaveChanges() == 1;
             }
         }
@@ -57,10 +58,10 @@ namespace _24hr.Services
             {
                 var entity =
                     ctx
-                    .Posts
+                    .Comments
                     .Single(e => e.Id == comment.Id);
 
-                entity.CommentId = comment.Id;
+                entity.Id = comment.Id;
                 entity.Text = comment.Text;
 
 
@@ -74,10 +75,10 @@ namespace _24hr.Services
             {
                 var entity =
                     ctx
-                    .Posts
+                    .Comments
                     .Single(e => e.Id == commentId);
 
-                ctx.Posts.Remove(entity);
+                ctx.Comments.Remove(entity);
 
                 return ctx.SaveChanges() == 1;
             }
