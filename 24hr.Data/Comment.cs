@@ -12,10 +12,13 @@ namespace _24hr.Data
         [Required]
         [Key]
         public int Id { get; set; }
-        [Required, MaxLength(500, ErrorMessage = "You entered too many characters. Please reduce length of comment."]
+        [Required, MaxLength(500, ErrorMessage = "You entered too many characters. Please reduce length of comment.")]
         public string Text { get; set; }
         [Required]
         public Guid AuthorId { get; set; } // Basic comment set up.
+
+
+
         
         
     }
