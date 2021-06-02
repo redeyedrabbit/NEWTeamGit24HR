@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using _24hr.Models;
+using _24hr.Services;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,51 +14,55 @@ namespace NEWTeamGit24HR.Controllers
     public class CommentController : ApiController
     {
         // Get All Comments
-            public IHttpActionResult Get()
+        public IHttpActionResult Get()
+        {
+            CommentService commentService = CreateCommentService();
+            var comments = commentService.GetComments();
+            return Ok(comments);
+        }
+
+        // Create Comment
+        public IHttpActionResult Post(CreateComment comment)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var service = CreateCommentService();
+
+            if (!service.CreateComment(comment))
+                return InternalServerError();
+
+            return Ok();
+        }
+
+        // Get Comments by AuthorId
+        public IHttpActionResult Get(int id)
+        {
+            CommentService commentService = CreateCommentService();
+            var comment = commentService.GetComments(id);
+            return Ok(comment);
+        }
+
+        // Delete Comment
+        public IHttpActionResult Delete(int id)
+        {
+            var service = CreateCommentService();
+
+            if (!service.DeleteComment(id))
             {
-                CommentService commentService = CreateCommentService();
-                var comments = commentService.GetComments();
-                return Ok(comments);
+                return InternalServerError();
             }
 
-            public IHttpActionResult Post(CommentCreate comment)
-            {
-                if (!ModelState.IsValid)
-                    return BadRequest(ModelState);
+            return Ok();
+        }
 
-                var service = CreateCommentService();
 
-                if (!service.CreateComment(comment))
-                    return InternalServerError();
-
-                return Ok();
-            }
-
-            public IHttpActionResult Get(int id)
-            {
-                CommentService commentService = CreateCommentService();
-                var comment = commentService.GetCommentById(id);
-                return Ok(comment);
-            }
-
-            public IHttpActionResult Delete(int id)
-            {
-                var service = CreateCommentService();
-
-                if (!service.DeleteComment(id))
-                {
-                    return InternalServerError();
-                }
-
-                return Ok();
-            }
-
-            private CommentService CreateCommentService()
-            {
-                Guid userId = Guid.Parse(User.Identity.GetUserId());
-                var commentService = new CommentService(userId);
-                return commentService;
-            }
+        private CommentService CreateCommentService()
+        {
+            Guid userId = Guid.Parse(User.Identity.GetUserId());
+            var commentService = new CommentService(userId);
+            return commentService;
         }
     }
 }
+
