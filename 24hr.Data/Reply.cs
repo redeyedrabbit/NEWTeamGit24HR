@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace _24hr.Data
 {
-   public class Reply
+    public class Reply
     {
         [Key]
         int Id { get; set; }
