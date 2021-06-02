@@ -39,7 +39,7 @@ namespace NEWTeamGit24HR.Controllers
         public IHttpActionResult Get(int id)
         {
             CommentService commentService = CreateCommentService();
-            var comment = commentService.GetComments(id);
+            var comment = commentService.GetComments();
             return Ok(comment);
         }
 
