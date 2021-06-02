@@ -40,7 +40,7 @@ namespace NEWTeamGit24HR.Controllers
             var posts = postService.GetPosts();
             return Ok(posts);
         }
-        // authorid or id???
+        
         // Get Posts By AuthorId
         public IHttpActionResult Get(int id)
         {

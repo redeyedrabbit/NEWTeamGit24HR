@@ -24,7 +24,7 @@ namespace _24hr.Services
                 new Comment()
                 {
                     Text = model.Text,
-                    CommentId = model.CommentId,
+                    Id = model.Id,
                 };
 
             using (var ctx = new ApplicationDbContext())
@@ -38,16 +38,15 @@ namespace _24hr.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var query =
-                    ctx
+                var query = ctx
                     .Posts
-                    .Where(e => e.OwnerId == _userId)
+                    .Where(e => e.AuthorId == _userId)
                     .Select(
                         e =>
                         new CommentListItem
                         {
-                            CommentId = e.ComentId,
-                            Text = e.Text,
+                            Id = e.Id,
+                            Text = e.Text
                         }
                         );
                 return query.ToArray();
@@ -61,9 +60,9 @@ namespace _24hr.Services
                 var entity =
                     ctx
                     .Posts
-                    .Single(e => e.CommentId == comment.CommentId);
+                    .Single(e => e.Id == comment.Id);
 
-                entity.CommentId = comment.CommentId;
+                entity.CommentId = comment.Id;
                 entity.Text = comment.Text;
 
 
@@ -78,7 +77,7 @@ namespace _24hr.Services
                 var entity =
                     ctx
                     .Posts
-                    .Single(e => e.CommentId == commentId);
+                    .Single(e => e.Id == commentId);
 
                 ctx.Posts.Remove(entity);
 

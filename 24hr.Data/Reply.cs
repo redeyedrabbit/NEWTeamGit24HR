@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace _24hr.Data
 {
-   public class Reply
+    public class Reply
     {
         [Key]
-        int Id { get; set; }
+        public int Id { get; set; }
 
         [ForeignKey(nameof(Comment))]
         public int? CommentId { get; set; }
