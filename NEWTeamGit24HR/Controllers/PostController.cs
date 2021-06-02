@@ -1,4 +1,7 @@
-﻿using System;
+﻿using _24hr.Models;
+using _24hr.Services;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,6 +12,14 @@ namespace NEWTeamGit24HR.Controllers
 {
     public class PostController : ApiController
     {
+        // Create Post Service
+        private PostService CreatePostService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var postService = new PostService(userId);
+            return postService;
+        }
+
         // Create Post
         public IHttpActionResult Post(PostCreate post)
         {
@@ -26,20 +37,20 @@ namespace NEWTeamGit24HR.Controllers
         public  IHttpActionResult Get()
         {
             PostService postService = CreatePostService();
-            var note = postService.GetPosts();
+            var posts = postService.GetPosts();
             return Ok(posts);
         }
-
+        // authorid or id???
         // Get Posts By AuthorId
-        public IHttpActionResult Get(int authorId)
+        public IHttpActionResult Get(int id)
         {
             PostService postService = CreatePostService();
-            var post = postService.GetPostByAuthorId(authorId);
+            var post = postService.GetPostByAuthorId(id);
             return Ok(post);
         }
 
         // PUT (Update) a Post
-        public IHttpActionResult Put(PostEdit post)
+        public IHttpActionResult Put(PostUpdate post)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
