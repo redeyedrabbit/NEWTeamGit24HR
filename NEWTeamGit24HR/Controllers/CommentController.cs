@@ -29,8 +29,10 @@ namespace NEWTeamGit24HR.Controllers
 
             var service = CreateCommentService();
 
-            if (!service.CreateComment(comment))
+            if (!service.CreateComment(comment))            
+
                 return InternalServerError();
+            
 
             return Ok();
         }

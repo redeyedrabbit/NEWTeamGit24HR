@@ -14,6 +14,8 @@ namespace _24hr.Models
         [Required]
         [MaxLength(3000)]
         public string Text { get; set; }
+        [Required]
+        public int AuthorId { get; set; }
 
         [Required]
         public int CommentId { get; set; }
