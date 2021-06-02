@@ -1,4 +1,7 @@
-﻿using System;
+﻿using _24hr.Models;
+using _24hr.Services;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -7,56 +10,61 @@ using System.Web.Http;
 
 namespace NEWTeamGit24HR.Controllers
 {
+    [Authorize]
     public class CommentController : ApiController
     {
-        [Authorize]
-        public class NoteController : ApiController
+        // Get All Comments
+        public IHttpActionResult Get()
         {
-            public IHttpActionResult Get()
+            CommentService commentService = CreateCommentService();
+            var comments = commentService.GetComments();
+            return Ok(comments);
+        }
+
+        // Create Comment
+        //public IHttpActionResult Post(CommentCreate comment)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return BadRequest(ModelState);
+
+        //    var service = CreateCommentService();
+
+        //    if (!service.CreateComment(comment))
+
+        //        return InternalServerError();
+
+
+        //    return Ok();
+        //}
+
+        // Get Comments by AuthorId
+        public IHttpActionResult Get(int id)
+        {
+            CommentService commentService = CreateCommentService();
+            var comment = commentService.GetComments();
+            return Ok(comment);
+        }
+
+        // Delete Comment
+        public IHttpActionResult Delete(int id)
+        {
+            var service = CreateCommentService();
+
+            if (!service.DeleteComment(id))
             {
-                CommentService noteService = CreateNoteService();
-                var notes = noteService.GetNotes();
-                return Ok(notes);
+                return InternalServerError();
             }
 
-            public IHttpActionResult Post(NoteCreate note)
-            {
-                if (!ModelState.IsValid)
-                    return BadRequest(ModelState);
+            return Ok();
+        }
 
-                var service = CreateNoteService();
 
-                if (!service.CreateNote(note))
-                    return InternalServerError();
-
-                return Ok();
-            }
-
-            public IHttpActionResult Get(int id)
-            {
-                CommentService commentService = CreateNoteService();
-                var note = commentService.GetCommentById(id);
-                return Ok(note);
-            }
-
-            public IHttpActionResult Delete(int id)
-            {
-                var service = CreateNoteService();
-
-                if (!service.DeleteNote(id))
-                {
-                    return InternalServerError();
-                }
-
-                return Ok();
-            }
-
-            private CommentService CreateNoteService()
-            {
-                Guid userId = Guid.Parse(User.Identity.GetUserId());
-                var noteService = new CommentService(userId);
-                return noteService;
-            }
+        private CommentService CreateCommentService()
+        {
+            Guid userId = Guid.Parse(User.Identity.GetUserId());
+            var commentService = new CommentService(userId);
+            return commentService;
         }
     }
 }
+

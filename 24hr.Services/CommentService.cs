@@ -24,12 +24,13 @@ namespace _24hr.Services
                 new Comment()
                 {
                     Text = model.Text,
-                    CommentId = model.CommentId,
+                    Id = model.Id,
+                    AuthorId = model.AuthorId
                 };
 
             using (var ctx = new ApplicationDbContext())
             {
-                ctx.Posts.Add(entity);
+                ctx.Comments.Add(entity); 
                 return ctx.SaveChanges() == 1;
             }
         }
@@ -38,16 +39,13 @@ namespace _24hr.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var query =
-                    ctx
-                    .Posts
-                    .Where(e => e.OwnerId == _userId)
-                    .Select(
-                        e =>
-                        new CommentListItem
+                var query = ctx
+                    .Comments
+                    .Where(e => e.AuthorId == _userId)
+                    .Select( e => new CommentListItem
                         {
-                            CommentId = e.ComentId,
-                            Text = e.Text,
+                            Id = e.Id,
+                            Text = e.Text
                         }
                         );
                 return query.ToArray();
@@ -60,10 +58,10 @@ namespace _24hr.Services
             {
                 var entity =
                     ctx
-                    .Posts
-                    .Single(e => e.CommentId == comment.CommentId);
+                    .Comments
+                    .Single(e => e.Id == comment.Id);
 
-                entity.CommentId = comment.CommentId;
+                entity.Id = comment.Id;
                 entity.Text = comment.Text;
 
 
@@ -77,10 +75,10 @@ namespace _24hr.Services
             {
                 var entity =
                     ctx
-                    .Posts
-                    .Single(e => e.CommentId == commentId);
+                    .Comments
+                    .Single(e => e.Id == commentId);
 
-                ctx.Posts.Remove(entity);
+                ctx.Comments.Remove(entity);
 
                 return ctx.SaveChanges() == 1;
             }
