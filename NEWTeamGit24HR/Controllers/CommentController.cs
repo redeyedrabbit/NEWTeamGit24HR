@@ -11,12 +11,12 @@ namespace NEWTeamGit24HR.Controllers
     [Authorize]
     public class CommentController : ApiController
     {
-        
+        // Get All Comments
             public IHttpActionResult Get()
             {
-                CommentService noteService = CreateCommentService();
-                var notes = noteService.GetComments();
-                return Ok(notes);
+                CommentService commentService = CreateCommentService();
+                var comments = commentService.GetComments();
+                return Ok(comments);
             }
 
             public IHttpActionResult Post(CommentCreate comment)
