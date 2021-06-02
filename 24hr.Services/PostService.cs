@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace _24hr.Services
 {
     public class PostService
@@ -25,7 +26,7 @@ namespace _24hr.Services
                 Title = model.Title,
                 Text = model.Text
             };
-            
+
             using (var ctx = new ApplicationDbContext())
             {
                 ctx.Posts.Add(entity);
@@ -51,7 +52,7 @@ namespace _24hr.Services
         }
 
         // Get Posts by Author Id
-        public IEnumerable<PostListItem> GetPostByAuthorId(int id)
+        public PostDetail GetPostByAuthorId(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -71,7 +72,7 @@ namespace _24hr.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Posts.SIngle(e => e.PostId == model.PostId && e.AuthorId == _userId);
+                var entity = ctx.Posts.Single(e => e.PostId == model.PostId && e.AuthorId == _userId);
                 entity.Title = model.Title;
                 entity.Text = model.Text;
 
