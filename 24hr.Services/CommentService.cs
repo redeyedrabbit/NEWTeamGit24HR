@@ -34,7 +34,7 @@ namespace _24hr.Services
             }
         }
 
-        public IEnumerable<CommentListItem> GetNotes()
+        public IEnumerable<CommentListItem> GetComments()
         {
             using (var ctx = new ApplicationDbContext())
             {
