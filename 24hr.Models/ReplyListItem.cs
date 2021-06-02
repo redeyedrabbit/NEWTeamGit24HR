@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace _24hr.Models
 {
-    public class PostDetail
+    public class ReplyListItem
     {
-        public int PostId { get; set; }
-        public string Title { get; set; }
+        public int ReplyId { get; set; }
         public string Text { get; set; }
     }
 }

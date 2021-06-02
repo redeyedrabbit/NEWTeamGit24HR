@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _24hr.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,7 +17,7 @@ namespace _24hr.Models
 
         [Required]
         public int CommentId { get; set; }
-        [ForeignKey(nameof(CategoryId))]
+        [ForeignKey(nameof(CommentId))]
         public virtual Comment Comment { get; set; }
     }
 }
