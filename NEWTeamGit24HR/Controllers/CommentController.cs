@@ -22,20 +22,20 @@ namespace NEWTeamGit24HR.Controllers
         }
 
         // Create Comment
-        public IHttpActionResult Post(CommentCreate comment)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+        //public IHttpActionResult Post(CommentCreate comment)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return BadRequest(ModelState);
 
-            var service = CreateCommentService();
+        //    var service = CreateCommentService();
 
-            if (!service.CreateComment(comment))            
+        //    if (!service.CreateComment(comment))
 
-                return InternalServerError();
-            
+        //        return InternalServerError();
 
-            return Ok();
-        }
+
+        //    return Ok();
+        //}
 
         // Get Comments by AuthorId
         public IHttpActionResult Get(int id)

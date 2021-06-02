@@ -85,6 +85,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Comment.cs" />
+    <Compile Include="Migrations\202106021659427_NewestMigration.cs" />
+    <Compile Include="Migrations\202106021659427_NewestMigration.Designer.cs">
+      <DependentUpon>202106021659427_NewestMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Post.cs" />
     <Compile Include="IdentityModels.cs" />
@@ -95,6 +99,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202106021659427_NewestMigration.resx">
+      <DependentUpon>202106021659427_NewestMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
