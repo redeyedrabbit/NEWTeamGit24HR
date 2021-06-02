@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -7,26 +8,25 @@ using System.Web.Http;
 
 namespace NEWTeamGit24HR.Controllers
 {
+    [Authorize]
     public class CommentController : ApiController
     {
-        [Authorize]
-        public class NoteController : ApiController
-        {
+        
             public IHttpActionResult Get()
             {
-                CommentService noteService = CreateNoteService();
-                var notes = noteService.GetNotes();
+                CommentService noteService = CreateCommentService();
+                var notes = noteService.GetComments();
                 return Ok(notes);
             }
 
-            public IHttpActionResult Post(NoteCreate note)
+            public IHttpActionResult Post(CommentCreate comment)
             {
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
-                var service = CreateNoteService();
+                var service = CreateCommentService();
 
-                if (!service.CreateNote(note))
+                if (!service.CreateComment(comment))
                     return InternalServerError();
 
                 return Ok();
@@ -34,16 +34,16 @@ namespace NEWTeamGit24HR.Controllers
 
             public IHttpActionResult Get(int id)
             {
-                CommentService commentService = CreateNoteService();
-                var note = commentService.GetCommentById(id);
-                return Ok(note);
+                CommentService commentService = CreateCommentService();
+                var comment = commentService.GetCommentById(id);
+                return Ok(comment);
             }
 
             public IHttpActionResult Delete(int id)
             {
-                var service = CreateNoteService();
+                var service = CreateCommentService();
 
-                if (!service.DeleteNote(id))
+                if (!service.DeleteComment(id))
                 {
                     return InternalServerError();
                 }
@@ -51,11 +51,11 @@ namespace NEWTeamGit24HR.Controllers
                 return Ok();
             }
 
-            private CommentService CreateNoteService()
+            private CommentService CreateCommentService()
             {
                 Guid userId = Guid.Parse(User.Identity.GetUserId());
-                var noteService = new CommentService(userId);
-                return noteService;
+                var commentService = new CommentService(userId);
+                return commentService;
             }
         }
     }
