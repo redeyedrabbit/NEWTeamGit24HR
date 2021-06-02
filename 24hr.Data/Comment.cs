@@ -17,6 +17,7 @@ namespace _24hr.Data
         [Required]
         public Guid AuthorId { get; set; } // Basic comment set up.
         
+        
     }
 }
 
